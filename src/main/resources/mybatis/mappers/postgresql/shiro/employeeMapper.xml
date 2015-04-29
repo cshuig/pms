@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiezhu.pms.dao.shiro.UserDao">
+     <sql id="employee_table">
+        accountname,name,branch_company_id,department_id,mobile,email,passwd,last_signin_time,flag,company_id
+      </sql>
+
+    <select id="getByUserNameAndCompany" parameterType="RealmVo"
+        resultType="RealmVo">
+        select E.id as userId,E.accountname as username,passwd as password,C.id as companyId
+        from employee E
+        join company C on E.company_id=C.id
+        where E.accountname=#{username} and C.name=#{company} and E.flag='1'
+    </select>
+     <insert id="saveEmp" parameterType="com.jiezhu.pms.entity.Employee" keyProperty="id" useGeneratedKeys="true">
+    insert into employee(<include refid="employee_table"/>) 
+    values( #{accountname},#{name},#{branchCompanyId},#{departmentId},#{mobile}
+    ,#{email},#{password},#{lastSigninTime},B'1',#{companyId}
+    );
+  </insert>
+  <insert id="saveEmployee2role" parameterType="com.jiezhu.pms.entity.Employee2role">
+    insert into employee2role(employee_id,role_id)
+    values( #{employeeId},#{roleId}
+    );
+  </insert>
+   <select id="findAllEmpByCompanyId"  parameterType="com.jiezhu.pms.comm.nmybatis.Page" resultType="UserManageVo">
+    select  e.id userId,e.accountname userName,d.name as deptName,e.name,e.email,row_number() OVER(ORDER BY e.id desc) indexNo
+    from employee e 
+    left join department d on e.department_id=d.id
+    left join employee2role er on e.id=er.employee_id
+    where e.company_id=#{params.companyId} and e.flag=B'1'
+     <if test="params.userName != null and  params.userName!=''">  
+        and e.accountname like '${params.userName}%'  
+    </if>  
+    <if test="params.roleName != null and  params.roleName !=''">  
+        and e.id in (select er.employee_id from employee2role er where er.role_id in(select r.id from role r where r.name like '${params.roleName}%'))
+    </if> order by e.id desc
+  </select>
+    <select id="findEmployeeByEmpIdAndComId" resultType="UserManageVo">
+     select e.id userId,e.accountname userName,e.name,e.department_id departmentId,e.mobile,e.email,d.name as deptName,er.role_id roleId,(select r.name from role r where r.id=er.role_id) roleName from employee e
+     left join department d on e.department_id=d.id
+     left join employee2role er on e.id=er.employee_id
+     where e.company_id=#{1} and e.id=#{0}
+    </select>
+    <update id="updateEmp" parameterType="com.jiezhu.pms.entity.Employee">
+        update employee
+        set 
+        accountname=#{accountname},name=#{name},department_id=#{departmentId},
+        mobile=#{mobile},email=#{email}
+        where id=#{id}
+    </update>
+    <update id="updateEmployee2role" parameterType="com.jiezhu.pms.entity.Employee2role">
+        update employee2role
+        set 
+        role_id=#{roleId}
+        where employee_id=#{employeeId}
+    </update>
+    <update id="deleteEmp">
+        update employee
+        set 
+        flag=B'0'
+        where id=#{0}
+    </update>
+    <update id="updateEmpPass" parameterType="com.jiezhu.pms.entity.Employee">
+        update employee
+        set 
+        passwd=#{password}
+        where id=#{id}
+    </update>
+    <select id="findEmployeeByEmpId" resultType="Employee">
+        select * from  employee
+        where id=#{0}
+    </select>
+    <insert id="saveUserOptRecords" parameterType="com.jiezhu.pms.entity.UserOperationRecords">
+    insert into user_operation_records(employee_id,operator_id,op_time,description)
+    values( #{employeeId},#{operatorId},#{opTime},#{description});
+    </insert>
+    <select id="findUserOptListByEmpId" resultType="UserOperationRecords">
+        select description from  user_operation_records
+        where employee_id=#{0}
+    </select>
+      <update id="updateEmpPassByUserId">
+        update employee
+        set 
+        passwd=#{1}
+        where id=#{0}
+    </update>
+    <select id="findEmployeeByUserId" resultType="boolean"> 
+    <![CDATA[ select count(id) from employee where id=#{0} and passwd=#{1} ]]> 
+    </select> 
+    <delete id="deleteByRoleId" parameterType="java.lang.Integer">
+        delete from employee2role where role_id=#{roleId}
+    </delete>
+</mapper>

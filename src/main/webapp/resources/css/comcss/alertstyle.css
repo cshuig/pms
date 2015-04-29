@@ -1,0 +1,30 @@
+.xubox_botton .xubox_botton2 {
+margin-left: -76px;
+width: 71px;
+height: 29px;
+line-height: 29px;
+background-position: -5px -114px;
+}
+.xubox_msgico {
+width: 32px;
+height: 32px;
+top: 52px;
+left: 15px;
+}
+
+.xubox_botton a {
+position: absolute;
+bottom: 10px;
+left: 50%;
+background:#F39700;
+text-decoration: none;
+color: #FFF;
+font-size: 14px;
+text-align: center;
+font-weight: bold;
+overflow: hidden;
+}
+.xubox_text {
+margin-left: 80px;
+width: 200px;
+}

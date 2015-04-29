@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<#import "/comm/comm.html" as comm>
+<link href="${comm.res}/css/comcss/general.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/comcss/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/authmanage/rolemanage/role.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${comm.res}/js/comjs/jquery-1.8.3.min.js"></script>
+
+<script type="text/javascript" src="${comm.res}/js/authmanage/rolemanage/role.js"></script>
+
+</head>
+<body>
+<#include  "/comm/head.html">
+
+<div class="main">
+<div class="content">
+<span class="sp-0"><img src="${comm.res}/images/content-home.png">角色管理：</span>
+<hr>
+</div>
+
+
+<div class="content">
+<div class="wrapper">
+<div class="div-title">
+<span class="sp-1">|</span><span>角色名称：</span>
+</div>
+<ul>
+<li id="did"><input type="text" value="" id="rolename" /></li>
+<ul>
+</div>
+<hr>
+</div>
+
+<#list dataList as data>
+<fieldset>
+ <legend><input class="int-toggle" id="int-toggle-data-${data_index}" type="checkbox" value="${data.id}"><span class="spa-txt">${data.name}</span></legend>
+ 
+ 
+ <#if (data.children?size>0) && (data.children[0].children?size>0) >
+ <#list data.children as menu>
+ <fieldset id="field-toggle-${data_index}-${menu_index}">
+ <legend><input class="int-toggle" id="int-menu-toggle-${data_index}_${menu_index}" type="checkbox" value="${menu.id}"><span class="spa-txt">${menu.name}</span></legend>
+ <div class="div-toggle" id="toggle-${data_index}_${menu_index}">
+ <#list menu.children as privilege>
+<input type="checkbox"  name="privilege" value="${privilege.id}" ><span class="spa-txt">${privilege.name}</span>
+</#list>
+</div>
+ </fieldset>
+ </#list>
+ <#else>
+<div class="div-toggle" id="toggle-${data_index}">
+ <#list data.children as privilege>
+<input type="checkbox"  name="privilege" value="${privilege.id}" ><span class="spa-txt">${privilege.name}</span>
+</#list>
+</div>
+ 
+ </#if>
+ </fieldset>
+ </#list>
+
+
+<button  id="roleadd_btn" class="btn" value="" >保&nbsp&nbsp存</button>
+<button  name=""  id="cancel_btn" class="btn" value="">取&nbsp&nbsp消</button>
+</div>
+
+
+<#include  "/comm/footer.html">
+</body>
+</html>

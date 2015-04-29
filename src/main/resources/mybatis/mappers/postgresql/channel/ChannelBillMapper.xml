@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiezhu.pms.dao.channel.ChannelBillDAO" >
+  <resultMap id="channelBillMap" type="com.jiezhu.pms.entity.ChannelBill" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="start_time" property="billStartTime" jdbcType="VARCHAR" />
+    <result column="end_time" property="billEndTime" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="payment_type" property="paymentType" jdbcType="VARCHAR" />
+    <result column="debit" property="debit" jdbcType="VARCHAR" />
+    <result column="credit" property="credit" jdbcType="VARCHAR" />
+    <result column="document_id" property="documentId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="operator_id" property="operatorId" jdbcType="VARCHAR" />
+    <result column="accounting_time" property="accountingTime" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="row_num" property="rowNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="searchChannelBill" parameterType="Map" resultMap="channelBillMap">
+    select id
+          ,channel_id
+          ,to_char(start_time, 'YYYY/MM/DD')
+          ,to_char(end_time, 'YYYY/MM/DD')
+          ,type
+          ,payment_type
+          ,debit
+          ,credit
+          ,document_id
+          ,status
+          ,operator_id
+          ,accounting_time
+          ,remarks
+          ,flag
+          ,row_number() OVER(ORDER BY CH.id) row_num
+      from ${table}.channel_bill CH
+      where 1=1
+    <if test="chanBil.id != null and chanBil.id != '' "> 
+        and id = CAST(#{chanBil.id} as integer)
+    </if>
+    <if test="chanBil.channelId != null and chanBil.channelId != '' "> 
+        and channel_id = CAST(#{chanBil.channelId} as integer)
+    </if>
+    <if test="chanBil.billStartTime != null and chanBil.billStartTime != '' "> 
+        and start_time = to_date(#{chanBil.billStartTime}, 'YYYY/MM/DD')
+    </if>
+    <if test="chanBil.billEndTime != null and chanBil.billEndTime != '' "> 
+        and end_time = to_date(#{chanBil.billEndTime}, 'YYYY/MM/DD')
+    </if>
+    <if test="chanBil.type != null and chanBil.type != '' "> 
+        and type = CAST(#{chanBil.type} as channel_bill_type_enum)
+    </if>
+    <if test="chanBil.paymentType != null and chanBil.paymentType != '' "> 
+        and payment_type = CAST(#{chanBil.paymentType} as channel_bill_payment_type_enum) 
+    </if>
+    <if test="chanBil.debit != null and chanBil.debit != '' "> 
+        and debit = #{chanBil.debit} 
+    </if>
+    <if test="chanBil.credit != null and chanBil.credit != '' "> 
+        and credit = #{chanBil.credit}
+    </if>
+    <if test="chanBil.documentId != null and chanBil.documentId != '' "> 
+        and document_id like '%' || #{chanBil.documentId} || '%'  
+    </if>
+    <if test="chanBil.status != null and chanBil.status != '' "> 
+        and status = CAST(#{chanBil.status} as channel_bill_status_enum )
+    </if>
+    <if test="chanBil.operatorId != null and chanBil.operatorId != '' "> 
+        and operator_id = #{chanBil.operatorId}
+    </if>
+    <if test="chanBil.accountingTime != null and chanBil.accountingTime != '' "> 
+        and accounting_time = to_date(#{chanBil.billEndTime}, 'YYYY/MM/DD')  
+    </if>
+    <if test="chanBil.remarks != null and chanBil.remarks != '' "> 
+        and remarks like '%' || #{chanBil.remarks} || '%'  
+    </if>
+    order by start_time desc
+  </select>
+  
+  <insert id="insertChannelBill" parameterType="Map">
+    insert into 
+        ${table}.channel_bill(
+             channel_id
+            ,start_time
+            ,end_time
+            ,type
+            <if test="chanBil.paymentType != null and chanBil.paymentType != ''">
+                ,payment_type
+            </if>
+            ,debit
+            ,credit
+            ,document_id
+            ,status
+            ,operator_id
+            ,accounting_time
+            ,notes
+            ,remarks
+        ) values (
+             CAST(#{chanBil.channelId} as integer)
+            ,CAST(#{chanBil.startTime} as date)
+            ,CAST(#{chanBil.endTime} as date)
+            ,CAST(#{chanBil.type} as channel_bill_type_enum)
+            <if test="chanBil.paymentType != null and chanBil.paymentType != ''">
+                ,CAST(#{chanBil.paymentType} as channel_bill_payment_type_enum)
+            </if>
+            ,#{chanBil.debit}
+            ,#{chanBil.credit}
+            ,#{chanBil.documentId}
+            ,CAST(#{chanBil.status} as channel_bill_status_enum)
+            ,CAST(#{chanBil.operatorId} as integer)
+            ,CAST(#{chanBil.accountingTime} as date)
+            ,#{chanBil.remarks}
+        )
+  </insert>
+  
+  <update id="updateChannelBill" parameterType="Map">
+    update ${table}.channel_bill
+    <set>
+        <if test="chanBil.channelId != null and chanBil.channelId != ''">
+            channel_id = #{chanBil.channelId}
+        </if>
+        <if test="chanBil.startTime != null and chanBil.startTime != ''">
+            start_time = #{chanBil.startTime}
+        </if>
+        <if test="chanBil.endTime != null and chanBil.endTime != ''">
+            end_time = #{chanBil.endTime}
+        </if>
+        <if test="chanBil.type != null and chanBil.type != ''">
+            type = #{chanBil.type}
+        </if>
+        <if test="chanBil.paymentType != null and chanBil.paymentType !=  ''">
+            payment_type = #{chanBil.paymentType}
+        </if>
+        <if test="chanBil.debit != null and chanBil.debit != ''">
+            debit = #{chanBil.debit}
+        </if>
+        <if test="chanBil.credit != null and chanBil.credit != ''">
+            credit = #{chanBil.credit}
+        </if>
+        <if test="chanBil.documentId != null and chanBil.documentId != ''">
+            document_id = #{chanBil.documentId}
+        </if>
+        <if test="chanBil.status != null and chanBil.status != ''">
+            status = #{chanBil.status}
+        </if>
+        <if test="chanBil.operatorId != null and chanBil.operatorId != ''">
+            operator_id = #{chanBil.operatorId}
+        </if>
+        <if test="chanBil.accountingTime != null and chanBil.accountingTime != ''">
+            accounting_time = #{chanBil.accountingTime}
+        </if>
+        <if test="chanBil.remarks != null and chanBil.remarks != ''">
+            remarks = #{chanBil.remarks}
+        </if>
+        <if test="chanBil.flag != null and chanBil.flag != ''">
+            flag = #{chanBil.flag}
+        </if>
+    </set>
+    where 1=1
+    <if test="chanBil.id != null and chanBil.id != ''">
+        id = #{chanBil.id}
+    </if>
+  </update>
+</mapper>

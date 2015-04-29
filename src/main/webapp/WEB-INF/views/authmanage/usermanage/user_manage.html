@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<#import "/comm/comm.html" as comm>
+<link href="${comm.res}/css/comcss/general.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/comcss/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/comcss/style.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/comcss/simplePagination.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/comcss/layer.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/authmanage/usermanage/usermanage.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${comm.res}/js/comjs/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${comm.res}/js/comjs/layer.min.js"></script>
+<script type="text/javascript" src="${comm.res}/js/comjs/jquery.simplePagination.js"></script>
+<script type="text/javascript" src="${comm.res}/js/authmanage/usermanage/user_manage.js"></script>
+<script type="text/javascript" src="${comm.res}/js/authmanage/usermanage/paging.js"></script>
+</head>
+<body>
+<#include  "/comm/head.html">
+<button class="btn-new" type="button";>新增用户</button>
+<form id="paging_umv" action=""  method="post">
+<div class="main">
+<div class="content">
+<div class="wrapper">
+<div class="div-list">
+<span>用户名:<input type="text" name="userName" value="${pageList.params.userName}"/> 角色:<input type="text" name="roleName" value="${pageList.params.roleName}"/></span>
+<div class="btn">
+<button  name="btn-searchUser" type="button";> 查询</button>
+<button  name="btn-clear" type="button"> 清空</button>
+</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="sp-0"><img src="${comm.res}/images/content-home.png">用户管理：</span>
+</div>
+<div class="content">
+<div class="wrapper">
+<table border="0" id="pagination-table">
+<thead class="tab-tr">.
+<tr>
+<th>序号</th>
+<th>用户名</th>
+<th>姓名</th>
+<th>部门</th>
+<th>电子邮件</th>
+<th>角色</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<#list pageList.list as umv>
+<tr class="tab-tr">
+<td>${umv_index+1}</td>
+<td>${umv.userName}</td>
+<td>${umv.name}</td>
+<td>${umv.deptName}</td>
+<td>${umv.email}</td>
+<td><#list umv.roleList as role>${role.name}</#list></td>
+<td>
+    <a href="${rc.contextPath}/account/show?userId=${umv.userId}" target="">查看</a>
+    <a class="a-txt" href="${rc.contextPath}/account/update?userId=${umv.userId}">修改</a>
+    <a class="a-txt" href="#" status="emp-pass-reset">重置密码</a>
+    <a class="a-txt" href="#" status="emp-delete">删除</a>
+    <input type="hidden" name="userId" value="${umv.userId}"></input>
+</td>
+</tr>
+</#list>
+</tbody>
+</table>
+<table id="pagination-table-model">
+        <tr id="pagination-table-tr-model" class="hidden"> 
+           <td name="indexNo"></td>
+           <td name="userName"></td>
+           <td name="name"></td>
+           <td name="deptName"></td>
+           <td name="email"></td>
+           <td name="roleName"></td>
+           <td>
+             <a href="" status="emp-view" target="">查看</a>
+             <a class="a-txt" href="" status="emp-update">修改</a>
+             <a class="a-txt" href="#" status="emp-pass-reset">重置密码</a>
+             <a class="a-txt" href="#" status="emp-delete">删除</a>
+             <input type="hidden" name="userId" value="1"></input>
+           </td>
+         </tr>
+    </table>
+    <div id="pagination">
+    </div>
+</div>
+</div>
+</div>
+</form>
+<#include  "/comm/footer.html">
+<input type="hidden" id="items" name="items" value="${pageList.fullListSize}"/>
+<input type="hidden" id="items-on-page" name="items-on-page" value="${pageList.objectsPerPage}"/>
+<input type="hidden" id="paging-url" name="paging-url" value="list?userName=${pageList.params.userName}&roleName=${pageList.params.roleName}"/>
+<input type="hidden" name="flag" value="${flag}"></input>
+</body>
+</html>

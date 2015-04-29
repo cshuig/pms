@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<#import "/comm/comm.html" as comm>
+<link href="${comm.res}/css/comcss/general.css" rel="stylesheet" type="text/css" />
+<link href="${comm.res}/css/comcss/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="${comm.res}/css/channel/detail.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${comm.res}/js/comjs/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${comm.res}/js/channel/detail.js"></script>
+</head>
+<body>
+<div class="logo">
+<span class="spn-txt">窝牛公寓管理系统 wpms</span>
+<div class="sp-login">
+	<ul>
+	<li>欢迎您，桑叶各尼</li>
+	<li><img src="${rc.contextPath}/resources/images/step.png" />修改密码</li>
+	<li id="li-out"><img src="${rc.contextPath}/resources/images/out.png" />退出</li>
+	</ul>
+</div>
+</div>
+<span class="nav-img"><img src="${rc.contextPath}/resources/images/home.png"></span>
+<div class = "nav">
+<ul class="ul-content">
+<li><a href = "#">预约管理</a>
+<div class="spz">
+    <ul class="ul-main">
+    <li class="li-main"><a href = "#">预约单管理</a>
+       
+    </li>     
+      
+    </ul>
+	</div>
+</li>
+
+<li><a href = "#">客房管理</a>
+<div class="spz">
+    <ul>
+    <li><a href = "#">客人账单</a></li>     
+    <li><a href = "#">方态图</a></li>   
+	<li><a href = "#">客人档案</a></li>  
+	<li><a href = "#">账单详情</a></li>   
+    </ul>
+	</div>
+</li>
+<li><a href = "#">渠道管理</a>
+<div class="spz">
+    <ul>
+    <li><a href = "#">公司管理</a></li>     
+    <li><a href = "#">渠道服务评价</a></li>     
+    </ul>
+	</div>
+</li>
+<li><a href = "#">报表管理</a>
+<div class="spz">
+    <ul>
+    <li><a href = "#">经营综合分析</a></li>     
+    <li><a href = "#">房费收入报表</a></li>       
+    </ul>
+	</div>
+</li>
+<li><a href = "#">其他管理</a>
+<div class="spz">
+    <ul>
+    <li class="nav_jw"><a href = "#">短信管理</a></li>     
+    <li class="nav_jw"><a href = "#">黑名单</a></li>     
+    </li>     
+    </ul>
+	</div>
+</li>
+<li><a href = "#">权限管理</a>
+<div class="spz">
+    <ul>
+    <li><a href = "#">角色管理</a></li>     
+    <li><a href = "#">用户管理</a></li>     
+    </ul>
+	</div>
+</li>
+</ul>
+</div>
+<button class="btn-new" name="" type="button";>新增渠道</button>
+<div class="main">
+<div class="content">
+<div class="wrapper">
+<div class="div-list">
+<div id="formwrapper">
+    <fieldset>
+    <div>
+      <label for="txt-accId">公司账号:</label>
+      <input type="text" id="txt-accId" name="accountId" value="${chan.accountId}" 
+        size="18" maxlength="30" />
+      <br>
+    </div>
+    <div>
+      <label for="txt-ctrId">合同号:</label>
+      <input type="text" id="txt-ctrId" name="contractId" value="${chan.contractId}"
+        size="18" maxlength="30" />
+      <br>
+    </div>
+	    <div>
+      <label for="txt-coprate">房价协议:</label>
+      <input type="text" id="txt-coprate" name="couponRate" value="${chan.couponRate}"
+        size="18" maxlength="30" /> %
+      <br>
+    </div>
+    </fieldset>
+</div>
+<div id="formwrapper">
+    <fieldset>
+    <div>
+      <label for="txt-comNm">公司名称:</label>
+      <input type="text" id="txt-comNm" name="companyName" value="${chan.companyName}"
+         size="18" maxlength="30" />
+      <br>
+    </div>
+    <div>
+      <label for="txt-ctrSt">合同开始日期:</label>
+      <input type="text" id="txt-ctrSt" name="contractStartTime" value="${chan.contractStartTime}"
+        size="18" maxlength="30" />
+      <br>
+    </div>
+    <div>
+      <label for="txt-contrct">联系人:</label>
+      <input type="text" id="txt-contrct" name="contact" value="${chan.contract}"
+        size="18" maxlength="30" />
+      <br>
+    </div>
+    </fieldset>
+</div>
+<div id="formwrapper">
+    <fieldset>
+    <div>
+      <label for="Name">公司性质:</label>
+      <select id="sel-type" name="type" value="" />
+            <option value=""></option>
+            <#list compTypeList as compType>
+                <#if compType.comboxItem = chan.type]>
+                    <option value="${compType.comboxItem}" selected>${compType.comboxItem}</option>
+                <#else>
+                    <option value="${compType.comboxItem}">${compType.comboxItem}</option>
+                </#if>
+            </#list>
+       </select>
+      <br/>
+    </div>
+    <div>
+      <label for="txt-ctrSt">合同结束日期:</label>
+      <input type="text" id="txt-ctrSt" name="contractEndTime" value="${chan.contractEndTime}"
+        size="18" maxlength="30" />
+      <br/>
+    </div>
+    <div>
+      <label for="txt-phone">联系人电话:</label>
+      <input type="text" id="txt-phone" name="phone" value="${chan.phone}"
+        size="18" maxlength="30" />
+      <br/>
+    </div>
+    </fieldset>
+</div>
+<div class="up-img">
+ <label for="Name">合同扫描件:</label>
+ <input type="file" id="file-ctrScanFile" />
+</div>
+</div>
+</div>
+
+</div>
+<div class="content">
+<span class="sp-0"><img src="${rc.contextPath}/resources/images/content-home.png" />渠道管理：</span>
+</div>
+<div class="content" id="main">
+<div class="wrapper">
+<table id="pagination-table" border="0">
+    <thead class="tab-tr">
+        <th>序号</th>
+        <th>营业日</th>
+        <th>财务类型</th>
+        <th>借方</th>
+        <th>贷方</th>
+        <th>单据号</th>
+        <th>状态</th>
+        <th>操作员</th>
+        <th>记账时间</th>
+        <th>备注</th>
+        <th>操作</th>
+    </thead>
+    <#list chanBilList as chanBil>
+    <tr class="tab-tr">
+        <td>${chanBil.rowNum}</td>
+        <td>${chanBil.billStartTime}-${chanBil.billEndTime}</td>
+        <td>${chanBil.debit}</td>
+        <td>${chanBil.credit}</td>
+        <td>${chanBil.documentId}</td>
+        <td>${chanBil.status}</td>
+        <td>${chanBil.operatorId}</td>
+        <td>${chanBil.accountingTime}</td>
+        <td>${chanBil.remarks}</td>
+        <td>${chanBil.billStartTime}</td>
+        <td><a href="">添加</a><a href="">调整</a></td>
+    </tr>
+    </#list>
+<tr>
+</table>
+</div>
+<div class="data-01">
+<p>累计借方</p>
+  <p>${debitSum}</p>
+</div>
+<div class="data-01">
+<p>累计贷方</p>
+  <p>${creditSum}</p>
+</div>
+<div class="data-01">
+<p>累计借余</p>
+  <p>${balance}</p>
+</div> 
+</div>
+<div class="btn-center">
+<button  class="btn-b">打印</button>
+<button  class="btn-b">调账</button>
+<button  class="btn-b">保存</button>
+<button  class="btn-b">返回</button>
+</div>
+</div>
+<div>
+    操作记录:
+    <#list opeList as ope>
+        <div>${ope.description}</div>
+    </#list>
+</div>
+<div class="footer-top"></div>
+<!-- 主要内容结束 -->
+<div class="footer">
+<ul>
+	<li>窝牛租房网      联系电话：010-65001639      E-mail：woniu01@woniuzufang.com</li>
+	<li>CopyRight©2014  北京捷住网络科技有限公司   版权所有  京ICP备14053338号-1 </li>	
+	</ul> 
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<#import "/comm/comm.html" as comm>
+<link href="${comm.res}/css/comcss/general.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/comcss/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/comcss/style.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/comcss/simplePagination.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/authmanage/usermanage/usermanage.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/home.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${comm.res}/js/comjs/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${comm.res}/js/home.js"></script>
+<script src="${comm.res}/js/comjs/Chart.js"></script>
+
+</head>
+<body>
+<#include  "/comm/head.html">
+<!-- 头部结束 -->
+<div class="content">
+<ul>
+<li  id="li-home"><img class="img-f1"
+src="${rc.contextPath}/resources/images/content-home.png"><span
+id="sp-tont">通知</span><span class="spa-list"><img
+src="${rc.contextPath}/resources/images/content-crile.png"><span
+id="sp-crile">8</span></span><a id="sp-more">更多</a></li>
+    <li>与蜗牛公寓的结算日期2014年1月2日仅剩1天，请尽快处理
+2014/12/12</li>
+    <li>与蜗牛公寓的结算日期2014年1月2日仅剩1天，请尽快处理
+2014/12/12</li>
+    <li>与蜗牛公寓的结算日期2014年1月2日仅剩1天，请尽快处理
+2014/12/12</li>
+    <li>与蜗牛公寓的结算日期2014年1月2日仅剩1天，请尽快处理
+2014/12/12</li>
+    <li>与蜗牛公寓的结算日期2014年1月2日仅剩1天，请尽快处理
+2014/12/12</li>
+    <li>与蜗牛公寓的结算日期2014年1月2日仅剩1天，请尽快处理
+2014/12/12</li>
+<li>${companyId}--${sessionId}:8080</li>
+</ul>
+<!-- 图表 -->
+<div id="canvas-holder">
+<div class="div-maintxt">今日数据</div>
+<canvas id="chart-area" width="500" height="500" />
+</div>
+<!-- 图表结束 -->
+<div class="img-float">
+<img src="${rc.contextPath}/resources/images/tu-5.png">
+<div class="img-txt">5</div>
+<img src="${rc.contextPath}/resources/images/tu-37.png">
+<div class="img-txt">5</div>
+<img
+src="${rc.contextPath}/resources/images/tu-13.png">
+<div class="img-txt">5</div>
+<img
+src="${rc.contextPath}/resources/images/tu-6.png">
+<div class="img-txt">5</div>
+<img
+src="${rc.contextPath}/resources/images/tu-12.png">
+<div class="img-txt">5</div>
+</div>
+
+<#include  "/comm/footer.html">
+<input type="hidden" id="items" name="items" value="${pageList.fullListSize}"/>
+<input type="hidden" id="items-on-page" name="items-on-page" value="${pageList.objectsPerPage}"/>
+<input type="hidden" id="paging-url" name="paging-url" value="/pms/account/list?accountname=${pageList.params.accountname}&rolename=${pageList.params.rolename}"/>
+</body>
+</html>

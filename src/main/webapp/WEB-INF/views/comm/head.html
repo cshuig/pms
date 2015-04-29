@@ -1,0 +1,72 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.5">
+<link href="${comm.res}/css/comcss/layer.css" rel="stylesheet">
+<link href="${comm.res}/css/comcss/alertstyle.css" rel="stylesheet">
+<script type="text/javascript" src="${comm.res}/js/comjs/layer.min.js"></script>
+<div class="logo">
+    <span class="spn-txt">窝牛公寓管理系统 WPMS</span>
+<div class="sp-login">
+    <ul>
+        <li>欢迎您，${userName}</li>
+    <li class="li-color"><img src="${comm.res}/images/step.png"/><a href="${rc.contextPath}/account/updatePassword">修改密码</a></li>
+    <li id="li-out" class="li-color"><img src="${comm.res}/images/out.png"/><a href="${rc.contextPath}/logout">退出</a></li>
+    </ul>
+</div>
+</div>
+<span class="nav-img"><img src="${comm.res}/images/home.png"/></span>
+<div class = "nav">
+<ul class="ul-content">
+<li><a href = "#">预约管理</a>
+<div class="spz">
+    <ul class="ul-main">
+    <li class="li-main"><a href = "#">预约单管理</a>
+       
+    </li>     
+      
+    </ul>
+    </div>
+</li>
+
+<li><a href = "#">客房管理</a>
+<div class="spz">
+    <ul>
+    <li><a href = "#">客人账单</a></li>     
+    <li><a href = "#">方态图</a></li>   
+    <li><a href = "#">客人档案</a></li>  
+    <li><a href = "#">账单详情</a></li>   
+    </ul>
+    </div>
+</li>
+<li><a href = "#">渠道管理</a>
+<div class="spz">
+    <ul>
+    <li><a href = "${rc.contextPath}/channel/list">公司管理</a></li>     
+    <li><a href = "#">渠道服务评价</a></li>     
+    </ul>
+</div>
+</li>
+<li><a href = "#">报表管理</a>
+<div class="spz">
+    <ul>
+    <li><a href = "#">经营综合分析</a></li>     
+    <li><a href = "#">房费收入报表</a></li>       
+    </ul>
+    </div>
+</li>
+<li><a href = "#">其他管理</a>
+<div class="spz">
+    <ul>
+    <li class="nav_jw"><a href = "#">短信管理</a></li>     
+    <li class="nav_jw"><a href = "#">黑名单</a></li>     
+   </ul></div></li>  
+<li><a href = "#">权限管理</a>
+<div class="spz">
+    <ul>
+    <li><a href = "${rc.contextPath}/role/list">角色管理</a></li>     
+    <li><a href = "${rc.contextPath}/account/list">用户管理</a></li>     
+    </ul>
+</div>
+</li>    
+</ul>
+</div>
+
+<input id="ctxPath" value="${rc.contextPath}" type="hidden" />

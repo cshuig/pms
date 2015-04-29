@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<#import "/comm/comm.html" as comm>
+<link href="${comm.res}/css/comcss/general.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/comcss/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="${comm.res}/css/authmanage/usermanage/user_password.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${comm.res}/js/comjs/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${comm.res}/js/authmanage/usermanage/update_password.js"></script>
+</head>
+<body>
+<#include  "/comm/head.html">
+<form action="${rc.contextPath}/account/updatePassword" method="post" id="form-update-passwd">
+<div class="main">
+<div class="content">
+<span class="sp-0"><img src="${comm.res}/images/content-home.png">修改密码：</span>
+<hr>
+</div>
+
+
+<div class="content">
+<div class="wrapper">
+<div class="div-title">
+<span class="sp-1">|</span><span>修改密码：</span>
+</div>
+<div id="formwrapper">
+ 
+    <fieldset>
+    <div>
+      <label for="Name" >* 旧密码:</label>
+      <input type="text" name="oldPassword" value="" size="20" maxlength="30"/>
+    </div>
+    <div>
+      <label for="Email">* 新密码:</label>
+      <input type="text" name="newPassword" value="" size="20" maxlength="150" />
+
+    </div>
+    <div>
+      <label for="Name">* 确认新密码:</label>
+      <input type="text" name="newPassword2" size="20" maxlength="15" />
+
+    </div>
+    <div>
+      <label for="confirm_password">* 验证码:</label>
+      <input type="text" name="verificationCode" size="20" maxlength="15" />
+    </div>
+<div class="yanzheng">
+
+</div>
+    <div>
+    </fieldset>
+  
+</div>
+</div>
+</div>
+<button id="btn-update-passwd" class="btn" value="">确&nbsp&nbsp定</button>
+<button name="btn-clear" id="btn-2" class="btn" value="">清&nbsp&nbsp空</button>
+</div>
+</form>
+<#include "/comm/footer.html">
+</body>
+<input type="hidden" name="flag" value="${flag}"></input>
+</html>

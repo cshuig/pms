@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiezhu.pms.dao.channel.ChannelOpeRecordDAO" >
+  <resultMap id="channelOperatorMap" type="com.jiezhu.pms.entity.ChannelOperatorRecord" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="operator_id" property="operatorId" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="channel_bill_id" property="channelBillId" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="op_time" property="opTime" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <insert id="insertChannel" parameterType="Map">
+    insert into 
+    ${table}.channel_operation_records(
+         operator_id
+         <if test="ope.channelId != null and ope.channelId != ''">
+            ,channel_id
+         </if>
+         <if test="ope.channelBillId != null and ope.hannelBillId != ''">
+            ,channel_bill_id
+         </if>
+        ,description
+        ,op_time)
+        values(
+         CAST(#{ope.operatorId} as Integer)
+         <if test="ope.channelId != null and ope.channelId != ''">
+            ,CAST(#{ope.channelId} as Integer)
+         </if>
+        <if test="ope.channelBillId != null and ope.channelBillId != ''">
+            ,CAST(#{ope.channelBillId} as Integer)
+         </if>
+        ,#{ope.description}
+        ,CAST(#{ope.opTime} as DATE)
+         )
+  </insert>
+  
+  <select id="serachOperationList" parameterType="Map" resultMap="channelOperatorMap">
+    select   id
+            ,operator_id
+            ,channel_id
+            ,channel_bill_id
+            ,description
+            ,op_time
+      from ${table}.channel_operation_records
+     where 1=1
+     <if test="ope.operatorId != null and ope.operatorId != ''">
+        and operator_id = CAST(#{ope.operatorId} as integer)
+     </if>
+     <if test="ope.channelId != null and ope.channelId != ''">
+        and channel_id = CAST(#{ope.channelId} as integer)
+     </if>
+     <if test="ope.channelBillId != null and ope.channelBillId != ''">
+        and channel_bill_id = CAST(#{ope.channelBillId} as integer)
+     </if>
+     <if test="ope.description != null and ope.description != ''">
+        and description = #{ope.description}
+     </if>
+     <if test="ope.opTime != null and ope.opTime != ''">
+        and op_time = CAST(#{ope.opTime} as date)
+     </if>
+     order by op_time desc
+  </select>
+</mapper>

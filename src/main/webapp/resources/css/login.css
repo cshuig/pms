@@ -1,0 +1,32 @@
+body {
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+}
+		a img{border:none;}
+        a{text-decoration:none;color:#333;}
+		img{max-width:100%;}
+		.spn-txt{margin-left:50px;height: 30px;width: 110%;position: absolute;top: 30px;font-size: 24px;font-family:"Microsoft YaHei";color:#362D2A;}
+		.logo{width:100%;height:66px;background:url(../images/logo.png) no-repeat;margin-left:18%;}
+		.content{background:url(../images/bg.jpg);max-width:100%;padding-bottom:51px;height: 45.5em;}
+		.wrapper{background: #ffffff;width: 360px;height: 370px;margin-left: 10%;margin-top: 10px;position: relative;top: 10%;left: 50%;}
+		.btn{height: 50px;padding-left: 60px;border:none;outline:none;background:#ffffff;color:#434343;font-size:18px;font-family:"Microsoft YaHei"}
+		.inp{width: 280px;height: 40px;border-radius: 7px;border: 1px solid #DCDCDC;outline: none;margin-left: 30px;margin-top: 30px;}
+		.in-btn{width: 280px;height: 40px;border-radius: 7px;border: 1px solid #DCDCDC;outline: none;margin-left: 30px;margin-top: 30px;background:#EB6000;color:#ffffff;font-size:18px;font-family:"Microsoft YaHei"}
+		label.user {margin-left: 30px;position: relative;top: 20px;color:#434343;font-size:16px;font-family:"Microsoft YaHei"}
+		.img-float{width: 1500px;margin-left: 18%;position: relative;bottom: 50px;}
+		.f1{display:inline-block;padding-left: 20px;}
+		.f1 span{display:block;}
+		.f2{position:relative;bottom:170px;left: 10px;color:#434343;font-size:16px;font-family:"Microsoft YaHei";}
+		.f4{width: 60%;}
+        #f10{position: relative;top: 20px;}
+		#f11{position:relative;top:20px;margin-left: 30px;}
+		#f12{position: relative;left: -120px;top: 20px;}
+		#f13{position: relative;left: -120px;top: 20px;}
+        .spa-f1 {padding-left: 30px;padding-top: 10px;}
+		.spa-f2 {color:#4F5F6E;font-size:12px;font-family:"Microsoft YaHei";}
+		.a-pw{margin-left:150px;color:#4F5F6E;}
+		span.f5 {width: 80%;}
+		.footer{width:100%;height:60px;background:#434343;padding-left: 80px;}
+		.footer ul li{color:#AAAAAA;padding-top: 10px;}
+		.footer-top{background:url(../images/footer-01.png);width:100%;height:60px;}

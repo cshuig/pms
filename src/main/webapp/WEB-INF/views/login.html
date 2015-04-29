@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="${rc.contextPath}/resources/css/comcss/general.css" rel="stylesheet" type="text/css">
+    <link href="${rc.contextPath}/resources/css/comcss/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="${rc.contextPath}/resources/css/login.css" rel="stylesheet" type="text/css">
+    <script src="${rc.contextPath}/resources/js/comjs/Chart.js"></script>
+</head>
+<body>
+<div class="logo">
+    <span class="spn-txt">窝牛公寓管理系统</span>
+</div>
+<div class="content">
+    <div class="wrapper">
+        <a class="a-login" href="#">
+            <button class="btn" value="">登录</button>
+        </a>
+        <a class="a-login" href="#">
+            <button class="btn" value="">申请公寓加盟</button>
+        </a>
+        <hr>
+        <div class="form-login">
+            <form action="${rc.contextPath}/dashboard" method="post">
+            <input  type="hidden"  name="company" value="${company}">
+                <label class="user">
+                    用户名
+                </label>
+                <br>
+                <!--测试时暂不校验用户名和密码-->
+                <input class="inp" type="text" pattern="*" title="账户名不存在" name="username">
+                <br>
+                <label class="user">
+                    密码
+                </label>
+                <br>
+                <input class="inp" type="password" pattern="*" title="密码错误" name="password">
+                <br>
+                <input class="in-btn" type="submit" pattern="" title="" value="登&nbsp&nbsp&nbsp录">
+            </form>
+        </div>
+        <div class="spa-f1"><input name="Fruit" type="checkbox" value=""/><span class="spa-f2">自动登录</span><a
+                class="a-pw" href="">忘记密码？</a></div>
+    </div>
+</div>
+<div class="img-float">
+    <div class="f1" id="f10">
+        <img src="${rc.contextPath}/resources/images/1.png">
+<span class="f2">
+微信营销助力
+<span class="f5">
+·多渠道的营销支持，集中统一
+管理
+</span>
+</span>
+    </div>
+    <div class="f1" id="f11">
+        <img src="${rc.contextPath}/resources/images/2.png">
+<span class="f2">
+<span class="f3">
+一站式整合
+</span>
+<span class="f4">
+·开发标准API，支持线上线下
+多渠道预定并实时无缝对接
+</span>
+</span>
+    </div>
+    <div class="f1" id="f12">
+        <img src="${rc.contextPath}/resources/images/3.png">
+<span class="f2">
+首家BS公寓管理系统
+<span class="f5">
+·支持公寓短租长租灵活切换与
+统一管理
+</span>
+</span>
+    </div>
+    <div class="f1" id="f13">
+        <img src="${rc.contextPath}/resources/images/4.png">
+<span class="f2">
+基于【云】
+<span class="f5">
+·以零成本即时启动，按需全面
+部署
+</span>
+</span>
+    </div>
+</div>
+<!-- 主要内容结束 -->
+<div class="footer">
+    <ul>
+        <li>窝牛租房网 联系电话：010-65001639 E-mail：woniu01@woniuzufang.com</li>
+        <li>CopyRight©2014 北京捷住网络科技有限公司 版权所有 京ICP备14053338号-1</li>
+    </ul>
+</div>
+</body>
+</html>

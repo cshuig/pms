@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiezhu.pms.dao.shiro.ResourcesDao">
+
+    <select id="findAllResources" resultType="RealmVo">
+        select url,R.name as role ,RS.id as resourceId,C.name as company,R.id as roleId
+        FROM resources RS
+        join resource2role r2r on RS.id=resource_id
+        join Role R on R.id=role_id 
+        join company C on r.company_id=C.id
+        where type=1
+    </select>
+    
+    
+    <delete id="deleteByRoleId" parameterType="java.lang.Integer">
+        delete from resource2role where role_id=#{roleId}
+    </delete>
+    
+    <insert id="grantResourceRole" useGeneratedKeys="true"
+        parameterType="java.util.List" >
+        insert into resource2role (resource_id,role_id)
+        values
+        <foreach collection="list" item="item" index="index"
+            separator=",">
+            (#{item.resourceId},#{item.roleId})
+        </foreach>
+    </insert>
+    
+    <select id="getPrivilegesByRoleId" resultType="String"
+        parameterType="Integer">
+        select array_to_string(ARRAY(
+        select resource_id from resource2role where role_id=#{roleId} ORDER BY resource_id
+        ),',')
+    </select>
+    
+    <select id="findAllRoleAndResourceByCompanyId" resultType="RoleManageVo"
+        parameterType="Integer">
+        select role_id as roleId,r.description as roleName,privilege_name as privilegeName
+        from resource2role 
+        join role R on role_id=R.id 
+        join resources RS on resource_id=RS.id
+        where r.company_id=#{companyId} 
+    </select>
+    
+    <select id="getResources" resultType="Resources">
+       select id,parent_id as parentid,menu_name as menuName,privilege_name as privilegeName 
+       from resources
+       where type=1 or type=2
+       order by id
+    </select>
+    
+    <select id="getPrivilegesByIds" parameterType="java.lang.String" resultType="java.lang.String">
+       select array_to_string(ARRAY(
+       select privilege_name from resources where id in (${_parameter})
+       ),',') ;
+   </select>
+    
+</mapper>

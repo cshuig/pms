@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiezhu.pms.dao.comm.ComboBoxDAO" >
+  <resultMap id="comboxMap" type="com.jiezhu.pms.entity.vo.Combox" >
+    <result column="comboxi_tem" property="comboxItem" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="searchComboxList" parameterType="map" resultMap="comboxMap">
+    select unnest(enum_range(NULL::${enum})) as comboxi_tem;
+  </select>
+</mapper>

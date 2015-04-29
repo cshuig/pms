@@ -1,0 +1,72 @@
+
+ body{margin:0px;padding:0px;overflow-x:hidden;background:#F5F5F5;} a img{border:none;} a{text-decoration:none;color:#333;}
+  img{max-width:100%;} .spn-txt{margin-left:60px;height: 30px;width: 110%;position: absolute;top: 20px;font-size: 24px;} .sp-login
+  ul {border:1px solid #ccc;width:310px;height:34px;} .sp-login ul li{display:inline;border-right:1px solid #ccc;font-size:
+  14px;padding-top: 16px;padding-bottom: 4px;padding-right: 15px;} .sp-login{width:100%;margin-left:800px;padding-top: 14px;}
+  .logo{width:100%;height:66px;background:url(images/logo.png) no-repeat;margin-left:23%;} .content{text-align:center;}
+  .main{background: #ffffff;width: 1028px;margin-left: 23%;height: 100%;position: relative;top: 10px;} hr {width:996px;margin-top:
+  20px;} .wrapper {width: 1450px;} td{ font-weight: normal; border-collapse: collapse; line-height: 25px; padding-left: 30px;} th{
+  font-weight: normal; border-collapse: collapse; line-height: 25px; padding-left: 30px;} ul li{list-style-type:none;}
+  .se-ll{width:260px;height:28px;} .sp-0{padding-right:80%;width:300px;position:relative;right: 10%;} .sp-1{color:#F39700;}
+  .footer{width:100%;height:120px;background:#434343;padding-left:80px;} #did{padding-left:55px;} #did
+  input{width:276px;height:28px;} .div-title{font-size:16px;font-family:&quot;Microsoft
+  YaHei&quot;;color:#4F5F6E;width:200px;position:relative;right:50px;} .footer ul {padding-top: 20px;} .footer ul
+  li{color:#AAAAAA;padding-top: 20px;padding-right:150px;}
+  table{width:70%;}
+  .a-txt{margin-left:5px;}
+  button.btn-new {margin-left: 23%;margin-top: 1em;}
+  .footer-top{background:url(images/footer-01.png);width:100%;height:60px;margin-top: 12em;} #dr{background:red;}
+  .div-list{border:1px solid #FACD89;width:1028px;height:100px;} .div-list #sp-user{position: relative;top: 23px;right: 150px;}
+  span {
+display: block;
+}
+select {
+width: 125px;
+margin-left: 15px;
+margin-right: 15px;
+}
+span.sp-user {
+padding-right: 55%;
+width: 900px;
+padding-top:10px;
+
+}
+span#user-01 {
+position: relative;
+right: 10.5%;
+}
+input[type="text"] {
+width: 125px;
+margin-left: 15px;
+margin-right: 15px;
+}
+span#user-02 {
+position: relative;
+right: 2.5%;
+}
+input.inp-01 {
+position: relative;
+left: 8px;
+}
+div#main {
+height: 500px;
+}
+  li#li-out {border-right: none;} button { border: 0; width: 100px; height: 30px; border-radius: 5px; background: #F39700; outline:
+  none; margin-bottom: 10px;display: block;} .div-toggle { width: 800px; padding-top: 20px; } .btn { position: relative;bottom: 60px; left:850px;margin-top:10px;} ul{ list-style:none; } a{
+  text-decoration:none; } /*设置二级导航样式*/ .nav { width: 100%; height: 46px; background-color: #434343; position:
+  relative; } .nav ul li { width:100px; height:30px; float:left; position:relative;z-index: 99; } .nav ul li a { display:block; width: 100px;
+  height:46px; line-height:40px; text-align:center; font-size: 16px; font-family: &quot;Microsoft YaHei&quot;; color: #fff; } .nav
+  ul li a:hover { color:#F39700; text-decoration:none; } /*设置一级导航样式*/ .nav ul li ul{ display:none; } .nav ul
+  li:hover ul{ display:block; width:100px; position:absolute; top:30px; left:0; background-color:#434343; } .nav ul li:hover ul li
+  a{ display:block; width:96px; height:26px; line-height:26px; border:2px solid gray; text-align:center; } .nav ul li:hover ul li
+  a:hover{ background-color:orange; } /*设置三级导航样式*/ .nav ul li:hover ul li ul { display:none; } .nav ul li:hover ul
+  li:hover ul{ display:block; width:100px; position:absolute; top:0px; left:100px; background-color:#b4b4b4; } .nav ul li:hover ul
+  li:hover ul li { width:100px; height:30px; } .nav ul li:hover ul li:hover ul li a { display:block; width:96px; height:26px;
+  line-height:26px; border:2px solid gray; text-align:center; } .nav ul li:hover ul li:hover ul li a:hover {
+  background-color:#00CC00; } .nav ul li:hover ul .nav_jw ul { display:none; } .nav ul li:hover ul .nav_jw:hover ul{ display:block;
+  width:100px; position:absolute; top:0px; left:-100px; background-color:#b4b4b4; } .nav ul li:hover ul .nav_jw:hover ul li {
+  width:100px; height:30px; } .nav ul li:hover ul .nav_jw:hover ul li a { display:block; width:96px; height:26px; line-height:26px;
+  border:2px solid gray; text-align:center; } .nav ul li:hover ul .nav_jw:hover ul li a:hover { background-color:#00CC00; } .spz {
+  position: relative; bottom: 30px; z-index: 99; } ul.ul-content { margin-left: 26%; width: 800px; float: left; margin-left: 22.5%;
+  position: relative; left: 65px; } span.nav-img { position: absolute; margin-left: 23.5%; z-index: 99; }
+  .div-toggle {width: 800px;padding-top: 10px;}

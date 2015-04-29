@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiezhu.pms.dao.channel.ChannelDAO" >
+  <resultMap id="channelMap" type="com.jiezhu.pms.entity.Channel" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="account_id" property="accountId" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="coupon_rate" property="couponRate" jdbcType="VARCHAR" />
+    <result column="contract_id" property="contractId" jdbcType="VARCHAR" />
+    <result column="contract_start_time" property="contractStartTime" jdbcType="VARCHAR" />
+    <result column="contract_end_time" property="contractEndTime" jdbcType="VARCHAR" />
+    <result column="contract_scan_file" property="contractScanFile" jdbcType="VARCHAR" />
+    <result column="operator_id" property="operatorId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="street" property="street" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    
+    <result column="row_num" property="rowNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="searchChannelInfoForPage" parameterType="com.jiezhu.pms.comm.nmybatis.Page" 
+    resultMap="channelMap">
+    select id,
+           account_id,
+           company_name,
+           contact,
+           phone,
+           coupon_rate,
+           contract_id,
+           to_char(contract_start_time, 'YYYY/MM/DD') as contract_start_time,
+           to_char(contract_end_time, 'YYYY/MM/DD') as contract_end_time,
+           contract_scan_file,
+           operator_id,
+           status,
+           type,
+           row_number() OVER(ORDER BY CH.id) row_num
+      from ${params.table}.channel CH
+     where 1=1
+     <if test="params.chan != null and params.chan != ''">
+         <if test="params.chan.accountId != null and params.chan.accountId != ''">
+            and account_id like '%' || #{params.chan.id} || '%'
+         </if>
+         <if test="params.chan.companyName != null and params.chan.companyName != ''">
+            and company_name like '%' || #{params.chan.companyName} || '%'
+         </if>
+         <if test="params.chan.contact != null and params.chan.contact != ''">
+            and contact like '%' || #{params.chan.contact} || '%'
+         </if>
+         <if test="params.chan.phone != null and params.chan.phone != ''">
+            and phone like '%' || #{params.chan.phone} || '%'
+         </if>
+         <if test="params.chan.couponRate != null and params.chan.couponRate != ''">
+            and coupon_rate like '%' || #{params.chan.couponRate} || '%'
+         </if>
+         <if test="params.chan.contractId != null and params.chan.contractId != ''">
+            and contract_id like '%' || #{params.chan.contractId} || '%'
+         </if>
+         <if test="params.chan.contractStartTime != null and params.chan.contractStartTime != ''">
+            and to_date(#{params.chan.contractStartTime}, 'YYYY/MM/DD') >= contract_start_time
+         </if>
+         <if test="params.chan.contractEndTime != null and params.chan.contractEndTime != ''">
+            and contract_end_time >= to_date(#{params.chan.contractEndTime}, 'YYYY/MM/DD')
+         </if>
+         <if test="params.chan.contractScanFile != null and params.chan.contractScanFile != ''">
+            and contract_scan_file like '%' || #{params.chan.contractScanFile} || '%'
+         </if>
+         <if test="params.chan.operatorId != null and params.chan.operatorId != ''">
+            and operator_id like '%' || #{params.chan.operatorId} || '%'
+         </if>
+         <if test="params.chan.status != null and params.chan.status != ''">
+            and status::character varying = #{params.chan.status}
+         </if>
+         <if test="params.chan.type != null and params.chan.type != ''">
+            and type::character varying = #{params.chan.type}
+         </if>
+     </if>
+      order by row_num asc
+  </select>
+  
+  <select id="countChannel" parameterType="Map" resultType="java.lang.Integer">
+    select count(1)
+      from ${table}.channel
+     where 1=1
+     <if test="chan.accountId != null and chan.accountId != ''">
+        and account_id like '%' || #{chan.accountId} || '%'
+     </if>
+     <if test="chan.companyName != null and chan.companyName != ''">
+        and company_name like '%' || #{chan.companyName} || '%'
+     </if>
+     <if test="chan.contact != null and chan.contact != ''">
+        and contact like '%' || #{chan.contact} || '%'
+     </if>
+     <if test="chan.phone != null and chan.phone != ''">
+        and phone like '%' || #{chan.phone} || '%'
+     </if>
+     <!-- 
+     <if test="chan.couponRate != null and chan.couponRate != ''">
+        and coupon_rate like '%' || #{chan.couponRate} || '%'
+     </if>
+      -->
+     <if test="chan.contractId != null and chan.contractId != ''">
+        and contract_id like '%' || #{chan.contractId} || '%'
+     </if>
+     <if test="chan.contractStartTime != null and chan.contractStartTime != ''">
+        and to_date(#{chan.contractStartTime}, 'YYYY/MM/DD') >= contract_start_time
+     </if>
+     <if test="chan.contractEndTime != null and chan.contractEndTime != ''">
+        and contract_end_time >= to_date(#{chan.contractEndTime}, 'YYYY/MM/DD')
+     </if>
+     <if test="chan.contractScanFile != null and chan.contractScanFile != ''">
+        and contract_scan_file like '%' || #{chan.contractScanFile} || '%'
+     </if>
+     <if test="chan.operatorId != null and chan.operatorId != ''">
+        and operator_id like '%' || #{chan.operatorId} || '%'
+     </if>
+     <if test="chan.status != null and chan.status != ''">
+        and status::character varying = #{chan.status}
+     </if>
+     <if test="chan.type != null and chan.type != ''">
+        and type::character varying = #{chan.type}
+     </if>
+  </select>
+  
+  <insert id="insertChannel" parameterType="Map" keyProperty="id" useGeneratedKeys="true">
+    insert into 
+    ${table}.channel(
+         account_id,
+         company_name,
+         contact,
+         phone,
+         coupon_rate,
+         contract_id,
+         contract_start_time,
+         contract_end_time,
+         contract_scan_file,
+         operator_id,
+         status,
+         type,
+         province,
+         city,
+         street,
+         address)
+        values(
+         #{chan.accountId},
+         #{chan.companyName},
+         #{chan.contact},
+         #{chan.phone},
+         CAST(#{chan.couponRate} as numeric),
+         #{chan.contractId},
+         CAST(#{chan.contractStartTime} as date),
+         CAST(#{chan.contractEndTime} as date),
+         #{chan.contractScanFile},
+         CAST(#{chan.operatorId} as Integer),
+         CAST(#{chan.status} as channel_status_enum),
+         CAST(#{chan.type} as channel_type_enum),
+         #{chan.province},
+         #{chan.city},
+         #{chan.street},
+         #{chan.address}
+         )
+  </insert>
+  
+  <select id="searchChannelInfo" parameterType="Map" resultMap="channelMap">
+    select account_id,
+           company_name,
+           contact,
+           phone,
+           coupon_rate,
+           contract_id,
+           to_char(contract_start_time, 'YYYY/MM/DD') as contract_start_time,
+           to_char(contract_end_time, 'YYYY/MM/DD') as contract_end_time,
+           contract_scan_file,
+           operator_id,
+           status,
+           type
+      from ${table}.channel
+     where 1=1
+     <if test="chan.accountId != null and chan.accountId != ''">
+        and account_id like '%' || #{chan.accountId} || '%'
+     </if>
+     <if test="chan.companyName != null and chan.companyName != ''">
+        and company_name like '%' || #{chan.companyName} || '%'
+     </if>
+     <if test="chan.contact != null and chan.contact != ''">
+        and contact like '%' || #{chan.contact} || '%'
+     </if>
+     <if test="chan.phone != null and chan.phone != ''">
+        and phone like '%' || #{chan.phone} || '%'
+     </if>
+     <!-- 
+     <if test="chan.couponRate != null and chan.couponRate != ''">
+        and coupon_rate like '%' || #{chan.couponRate} || '%'
+     </if>
+      -->
+     <if test="chan.contractId != null and chan.contractId != ''">
+        and contract_id like '%' || #{chan.contractId} || '%'
+     </if>
+     <if test="chan.contractStartTime != null and chan.contractStartTime != ''">
+        and to_date(#{chan.contractStartTime}, 'YYYY/MM/DD') >= contract_start_time
+     </if>
+     <if test="chan.contractEndTime != null and chan.contractEndTime != ''">
+        and contract_end_time >= to_date(#{chan.contractEndTime}, 'YYYY/MM/DD')
+     </if>
+     <if test="chan.contractScanFile != null and chan.contractScanFile != ''">
+        and contract_scan_file like '%' || #{chan.contractScanFile} || '%'
+     </if>
+     <if test="chan.operatorId != null and chan.operatorId != ''">
+        and operator_id like '%' || #{chan.operatorId} || '%'
+     </if>
+     <if test="chan.status != null and chan.status != ''">
+        and status::character varying = #{chan.status}
+     </if>
+     <if test="chan.type != null and chan.type != ''">
+        and type::character varying = #{chan.type}
+     </if>
+     <!--
+     order by contract_start_time desc
+     -->
+  </select>
+  
+  <update id="updateChannel" parameterType="Map">
+    update ${table}.channel 
+    <set>
+        <if test="chan.accountId != null and chan.accountId != ''">
+            account_id = #{chan.accountId}
+        </if>
+        <if test="chan.type != null and chan.type != ''">
+            type = #{chan.type}
+        </if>
+        <if test="chan.companyName != null and chan.companyName != ''">
+            company_name = #{chan.companyName}
+        </if>
+        <if test="chan.contact != null and chan.contact != ''">
+            contact = #{chan.contact}
+        </if>
+        <if test="chan.phone != null and chan.phone != ''">
+            phone = #{chan.phone}
+        </if>
+        <if test="chan.couponRate != null and chan.couponRate != ''">
+            coupon_rate = #{chan.couponRate}
+        </if>
+        <if test="chan.contractId != null and chan.contractId != ''">
+            contract_id = #{chan.contractId}
+        </if>
+        <if test="chan.contractStartTime != null and chan.contractStartTime != ''">
+            contract_start_time = #{chan.contractStartTime}
+        </if>
+        <if test="chan.contractEndTime != null and chan.contractEndTime != ''">
+            contract_end_time = #{chan.contractEndTime}
+        </if>
+        <if test="chan.contractScanFile != null and chan.contractScanFile != ''">
+            contract_scan_file = #{chan.contractScanFile}
+        </if>
+        <if test="chan.operatoId != null and chan.operatoId != ''">
+            operator_id = #{chan.operatoId}
+        </if>
+        <if test="chan.status != null and chan.status != ''">
+            status = #{chan.status}
+        </if>
+        <if test="chan.province != null and chan.province != ''">
+            province = #{chan.province}
+        </if>
+        <if test="chan.city != null and chan.city != ''">
+            city = #{chan.city}
+        </if>
+        <if test="chan.street != null and chan.street != ''">
+            street = #{chan.street}
+        </if>
+        <if test="chan.address != null and chan.address != ''">
+            address = #{chan.address}
+        </if>
+        <if test="chan.flag != null and chan.flag != ''">
+            flag = #{chan.flag}
+        </if>
+    </set>
+    where id = #{chan.id}
+  </update>
+</mapper>
